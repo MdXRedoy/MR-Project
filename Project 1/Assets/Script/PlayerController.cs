@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed;
     private Rigidbody rb;
+    public Text winText;
+    private int count;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        count = 0;
+        winText.text = "";
     }
     void FixedUpdate()
     {
@@ -26,6 +31,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Cube"))
         {
             other.gameObject.SetActive(false);
+            count = count + 1;
+            if (count >= 13)
+            {
+                winText.text = "Victory!!!";
+            }
         }
     }
 }
